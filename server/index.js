@@ -1,0 +1,36 @@
+//import from package
+const express = require("express");
+const mongoose = require("mongoose");
+//import other file
+const authRouter = require("./routes/auth");
+
+
+//init
+const PORT = 3000;
+const app = express();
+const DB =
+ "mongodb+srv://teamdacn1:dacn1%40123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+
+//middleware
+// client =>middleware => server =>client
+
+app.use(express.json());
+app.use(authRouter);
+
+
+//Connections
+mongoose.connect(DB).then(() => {
+    console.log("Connection Successful");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+app.listen(PORT,() => {
+    console.log('connected at port '+ PORT);
+
+});
+
+
+
