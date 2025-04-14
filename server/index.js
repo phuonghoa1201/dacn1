@@ -1,6 +1,7 @@
 //import from package
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 //import other file
 const authRouter = require("./routes/auth");
 
@@ -14,7 +15,7 @@ const DB =
 
 //middleware
 // client =>middleware => server =>client
-
+app.use(cors());
 app.use(express.json());
 app.use(authRouter);
 
