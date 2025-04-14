@@ -10,8 +10,7 @@ const authRouter = require("./routes/auth");
 const PORT = 3000;
 const app = express();
 const DB =
- "mongodb+srv://teamdacn1:dacn1%40123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
+ "mongodb+srv://anhngocthiduong:dacn123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 //middleware
 // client =>middleware => server =>client
