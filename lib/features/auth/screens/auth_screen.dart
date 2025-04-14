@@ -3,6 +3,7 @@ import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/common/widgets/custom_textfield.dart';
 import 'package:dacn1/features/auth/services/auth_service.dart';
 import 'package:dacn1/common/widgets/custom_button.dart';
+
 enum Auth { signin, signup }
 
 class AuthScreen extends StatefulWidget {
@@ -30,6 +31,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _passwordController.dispose();
     _nameController.dispose();
   }
+
   void signUpUser() {
     authService.signUpUser(
       context: context,
@@ -51,20 +53,16 @@ class _AuthScreenState extends State<AuthScreen> {
             children: [
               const Text(
                 'Welcome',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
               ),
               ListTile(
-                tileColor: _auth == Auth.signup
-                    ? GlobalVariables.backgroundColor
-                    : GlobalVariables.greyBackgroundCOlor,
+                tileColor:
+                    _auth == Auth.signup
+                        ? GlobalVariables.backgroundColor
+                        : GlobalVariables.greyBackgroundCOlor,
                 title: const Text(
                   'Create Account',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
@@ -107,20 +105,19 @@ class _AuthScreenState extends State<AuthScreen> {
                               signUpUser();
                             }
                           },
-                        )
+                        ),
                       ],
                     ),
                   ),
                 ),
               ListTile(
-                tileColor: _auth == Auth.signin
-                    ? GlobalVariables.backgroundColor
-                    : GlobalVariables.greyBackgroundCOlor,
+                tileColor:
+                    _auth == Auth.signin
+                        ? GlobalVariables.backgroundColor
+                        : GlobalVariables.greyBackgroundCOlor,
                 title: const Text(
                   'Sign-In.',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 leading: Radio(
                   activeColor: GlobalVariables.secondaryColor,
@@ -170,7 +167,6 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 }
-
 
 //   @override
 //   Widget build(BuildContext context) {
