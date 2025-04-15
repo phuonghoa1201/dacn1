@@ -1,3 +1,4 @@
+import 'package:dacn1/features/home/screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:badges/badges.dart' as badges;
@@ -17,8 +18,8 @@ class _BottomBarState extends State<BottomBar> {
   double bottomBarBorderWidth = 5;
 
   List<Widget> pages = [
-    Center(child: Text("HomeScreen")),
-  const AccountScreen(),
+    const HomeScreen(),
+    const AccountScreen(),
     Center(child: Text("CartScreen")),
   ];
 
