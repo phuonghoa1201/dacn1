@@ -34,6 +34,7 @@ class CustomButton extends StatelessWidget {
           fontWeight: FontWeight.w600,
           letterSpacing: 0.5,
         ),
+
       ),
     );
   }
