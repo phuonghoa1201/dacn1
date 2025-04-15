@@ -1,3 +1,4 @@
+import 'package:dacn1/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/features/auth/screens/auth_screen.dart';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
@@ -10,6 +11,12 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const AuthScreen(),
       );
+    // case ProductDetailScreen.routeName:
+    //   var product = routeSettings.arguments as Product;
+    //   return MaterialPageRoute(
+    //     settings: routeSettings,
+    //     builder: (_) => ProductDetailScreen(product: product),
+    //   );
     case HomeScreen.routeName:
       return MaterialPageRoute(
         settings: routeSettings,
@@ -20,14 +27,18 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
         settings: routeSettings,
         builder: (_) => const BottomBar(),
       );
+    case AddProductScreen.routeName:
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => const AddProductScreen(),
+      );
     default:
       return MaterialPageRoute(
         settings: routeSettings,
-        builder: (_) => const Scaffold(
-          body: Center(
-            child: Text('Screen does not exist'),
-          )
-        ),
+        builder:
+            (_) => const Scaffold(
+              body: Center(child: Text('Screen does not exist')),
+            ),
       );
   }
 }
