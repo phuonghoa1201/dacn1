@@ -1,10 +1,14 @@
+import 'package:dacn1/features/home/widgets/address_box.dart';
+import 'package:dacn1/features/home/widgets/carousel_image.dart';
+import 'package:dacn1/features/home/widgets/deal_of_day.dart';
+import 'package:dacn1/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/features/auth/services/auth_service.dart';
 
+
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
-
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -43,7 +47,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         prefixIcon: InkWell(
                           onTap: () {},
                           child: const Padding(
-                            padding: EdgeInsets.only(left: 6),
+                            padding: EdgeInsets.only(
+                              left: 6,
+                            ),
                             child: Icon(
                               Icons.search,
                               color: Colors.black,
@@ -55,17 +61,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.only(top: 10),
                         border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
                           borderSide: BorderSide.none,
                         ),
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(7),
+                          ),
                           borderSide: BorderSide(
                             color: Colors.black38,
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search items you want to buy',
+                        hintText: 'Search what you want to find',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 17,
@@ -85,7 +95,18 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: const [
+            AddressBox(),
+            SizedBox(height: 10),
+            TopCategories(),
+            SizedBox(height: 10),
+            CarouselImage(),
+            DealOfDay(),
+          ],
+        ),
+      ),
     );
   }
 }

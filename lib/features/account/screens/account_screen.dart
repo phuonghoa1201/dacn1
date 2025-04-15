@@ -1,5 +1,9 @@
+import 'package:dacn1/features/account/widgets/below_app_bar.dart';
+import 'package:dacn1/features/account/widgets/orders.dart';
+import 'package:dacn1/features/account/widgets/top_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
+
 class AccountScreen extends StatelessWidget {
   const AccountScreen({Key? key}) : super(key: key);
 
@@ -46,11 +50,11 @@ class AccountScreen extends StatelessWidget {
       ),
       body: Column(
         children: const [
-          // BelowAppBar(),
+          BelowAppBar(),
           SizedBox(height: 10),
-          // TopButtons(),
+          TopButtons(),
           SizedBox(height: 20),
-          // Orders(),
+          Orders(),
         ],
       ),
     );

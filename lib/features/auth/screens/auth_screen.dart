@@ -49,123 +49,106 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 
+  void toggleAuthMode() {
+    setState(() {
+      _auth = _auth == Auth.signup ? Auth.signin : Auth.signup;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundCOlor,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Welcome',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+
+              const SizedBox(height: 12), // Khoảng cách nhỏ giữa Welcome và logo
+              Image.asset(
+                'assets/images/Tech_Zone.png',
+                width: 250,
+                fit: BoxFit.contain,
               ),
-              ListTile(
-                tileColor:
-                    _auth == Auth.signup
-                        ? GlobalVariables.backgroundColor
-                        : GlobalVariables.greyBackgroundCOlor,
-                title: const Text(
-                  'Create Account',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.signup,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                ),
-              ),
+
+              const SizedBox(height: 20),
               if (_auth == Auth.signup)
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.backgroundColor,
-                  child: Form(
-                    key: _signUpFormKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          controller: _nameController,
-                          hintText: 'Name',
+                Form(
+                  key: _signUpFormKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        controller: _nameController,
+                        hintText: 'Name',
+                        prefixIcon: Icons.person,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomTextField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                        prefixIcon: Icons.email,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomTextField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                        prefixIcon: Icons.lock,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Sign Up',
+                        onTap: () {
+                          if (_signUpFormKey.currentState!.validate()) {
+                            signUpUser();
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: toggleAuthMode,
+                        child: const Text(
+                          'Already have an account? Sign In',
+                          style: TextStyle(fontSize: 14),
                         ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          controller: _emailController,
-                          hintText: 'Email',
-                        ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          controller: _passwordController,
-                          hintText: 'Password',
-                        ),
-                        const SizedBox(height: 10),
-                        CustomButton(
-                          text: 'Sign Up',
-                          onTap: () {
-                            if (_signUpFormKey.currentState!.validate()) {
-                              signUpUser();
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ),
-              ListTile(
-                tileColor:
-                    _auth == Auth.signin
-                        ? GlobalVariables.backgroundColor
-                        : GlobalVariables.greyBackgroundCOlor,
-                title: const Text(
-                  'Sign-In.',
-                  style: TextStyle(fontWeight: FontWeight.bold),
-                ),
-                leading: Radio(
-                  activeColor: GlobalVariables.secondaryColor,
-                  value: Auth.signin,
-                  groupValue: _auth,
-                  onChanged: (Auth? val) {
-                    setState(() {
-                      _auth = val!;
-                    });
-                  },
-                ),
-              ),
-              if (_auth == Auth.signin)
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  color: GlobalVariables.backgroundColor,
-                  child: Form(
-                    key: _signInFormKey,
-                    child: Column(
-                      children: [
-                        CustomTextField(
-                          controller: _emailController,
-                          hintText: 'Email',
+                )
+              else
+                Form(
+                  key: _signInFormKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        controller: _emailController,
+                        hintText: 'Email',
+                        prefixIcon: Icons.email,
+                      ),
+                      const SizedBox(height: 10),
+                      CustomTextField(
+                        controller: _passwordController,
+                        hintText: 'Password',
+                        prefixIcon: Icons.lock,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomButton(
+                        text: 'Sign In',
+                        onTap: () {
+                          if (_signInFormKey.currentState!.validate()) {
+                            signInUser();
+                          }
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      TextButton(
+                        onPressed: toggleAuthMode,
+                        child: const Text(
+                          "Don't have an account? Sign Up",
+                          style: TextStyle(fontSize: 14),
                         ),
-                        const SizedBox(height: 10),
-                        CustomTextField(
-                          controller: _passwordController,
-                          hintText: 'Password',
-                        ),
-                        const SizedBox(height: 10),
-                        CustomButton(
-                          text: 'Sign In',
-                          onTap: () {
-                            if (_signInFormKey.currentState!.validate()) {
-                              signInUser();
-                            }
-                          },
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
             ],
