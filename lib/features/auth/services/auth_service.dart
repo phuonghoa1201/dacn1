@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
-import 'package:dacn1/features/home/screen/home_screen.dart';
+import 'package:dacn1/features/admin/screens/admin_screen.dart';
+import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -65,7 +66,8 @@ class AuthService {
         body: jsonEncode({'email': email, 'password': password}),
         headers: {'Content-Type': 'application/json; charset=UTF-8'},
       );
-      //  In response ra để debug
+
+      // In response ra để debug
       print('📦 Status Code: ${res.statusCode}');
       print('📨 Body: ${res.body}');
 
@@ -75,29 +77,35 @@ class AuthService {
         onSuccess: () async {
           SharedPreferences prefs = await SharedPreferences.getInstance();
 
-          // Decode body to JSON
           Map<String, dynamic> responseData = jsonDecode(res.body);
-
-          // Lưu token
           await prefs.setString('x-auth-token', responseData['token']);
 
-          // Cập nhật user vào provider
+          // Cập nhật vào Provider
           Provider.of<UserProvider>(context, listen: false).setUser(res.body);
 
-          showSnackBar(context, 'Sign-in successfull');
+          showSnackBar(context, 'Sign-in successful');
 
-          // Điều hướng vào trang chính
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            BottomBar.routeName,
-            (route) => false,
-          );
+          // 👉 Điều hướng theo loại người dùng
+          String userType = responseData['type'];
+          if (userType == 'admin') {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const AdminScreen()),
+            );
+          } else {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              BottomBar.routeName,
+                  (route) => false,
+            );
+          }
         },
       );
     } catch (e) {
       showSnackBar(context, e.toString());
     }
   }
+
 
   // get user data
   void getUserData(BuildContext context) async {

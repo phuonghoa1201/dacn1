@@ -3,6 +3,7 @@ import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/common/widgets/custom_textfield.dart';
 import 'package:dacn1/features/auth/services/auth_service.dart';
 import 'package:dacn1/common/widgets/custom_button.dart';
+import 'package:dacn1/common/widgets/password_text_field.dart';
 
 enum Auth { signin, signup }
 
@@ -90,7 +91,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         prefixIcon: Icons.email,
                       ),
                       const SizedBox(height: 10),
-                      CustomTextField(
+                      PasswordTextField(
                         controller: _passwordController,
                         hintText: 'Password',
                         prefixIcon: Icons.lock,
@@ -126,7 +127,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         prefixIcon: Icons.email,
                       ),
                       const SizedBox(height: 10),
-                      CustomTextField(
+                      PasswordTextField(
                         controller: _passwordController,
                         hintText: 'Password',
                         prefixIcon: Icons.lock,

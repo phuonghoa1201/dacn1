@@ -2,7 +2,7 @@ import 'package:dacn1/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/features/auth/screens/auth_screen.dart';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
-import 'package:dacn1/features/home/screen/home_screen.dart';
+import 'package:dacn1/features/home/screens/home_screen.dart';
 
 Route<dynamic> generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {

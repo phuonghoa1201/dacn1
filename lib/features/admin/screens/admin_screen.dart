@@ -2,13 +2,13 @@ import 'package:dacn1/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../contants/global_variables.dart';
+
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
 
   @override
   State<AdminScreen> createState() => _AdminScreenState();
 }
-
 
 class _AdminScreenState extends State<AdminScreen> {
   int _page = 0;
@@ -18,7 +18,7 @@ class _AdminScreenState extends State<AdminScreen> {
   List<Widget> pages = [
     const PostsScreen(),
     // const AnalyticsScreen(),
-  //   const OrdersScreen(),
+    //   const OrdersScreen(),
   ];
 
   void updatePage(int page) {
@@ -45,9 +45,13 @@ class _AdminScreenState extends State<AdminScreen> {
                 alignment: Alignment.topLeft,
                 child: Image.asset(
                   'assets/images/Tech_Zone.png',
-                  width: 120,
-                  height: 45,
-                  color: Colors.black,
+                  width:
+                      MediaQuery.of(context).size.width *
+                      0.4, // 40% chiều rộng màn hình
+                  height:
+                      MediaQuery.of(context).size.height *
+                      0.2, // 10% chiều cao màn hình
+                  fit: BoxFit.contain,
                 ),
               ),
               const Text(
@@ -56,7 +60,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -77,16 +81,15 @@ class _AdminScreenState extends State<AdminScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 0
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 0
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.home_outlined,
-              ),
+              child: const Icon(Icons.home_outlined),
             ),
             label: '',
           ),
@@ -97,16 +100,15 @@ class _AdminScreenState extends State<AdminScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 1
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.analytics_outlined,
-              ),
+              child: const Icon(Icons.analytics_outlined),
             ),
             label: '',
           ),
@@ -117,16 +119,15 @@ class _AdminScreenState extends State<AdminScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 2
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 2
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.all_inbox_outlined,
-              ),
+              child: const Icon(Icons.all_inbox_outlined),
             ),
             label: '',
           ),
