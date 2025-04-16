@@ -1,4 +1,6 @@
 import 'package:dacn1/features/admin/screens/add_product_screen.dart';
+import 'package:dacn1/features/home/screens/category_deals_screen.dart';
+import 'package:dacn1/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/features/auth/screens/auth_screen.dart';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
@@ -21,6 +23,22 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (_) => const HomeScreen(),
+      );
+    case CategoryDealsScreen.routeName:
+      var category = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => CategoryDealsScreen(
+          category: category,
+        ),
+      );
+    case SearchScreen.routeName:
+      var searchQuery = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (_) => SearchScreen(
+          searchQuery: searchQuery,
+        ),
       );
     case BottomBar.routeName:
       return MaterialPageRoute(
