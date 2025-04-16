@@ -1,4 +1,4 @@
-import 'package:dacn1/features/home/screen/home_screen.dart';
+import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:badges/badges.dart' as badges;
