@@ -1,5 +1,5 @@
 import 'package:dacn1/features/auth/screens/auth_screen.dart';
-import 'package:dacn1/features/home/screen/home_screen.dart';
+import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/router.dart';
@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:dacn1/features/auth/services/auth_service.dart';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -52,10 +53,10 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true, // can remove this line
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
-      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-
-          ? const BottomBar()
-          : const AuthScreen(),
+      home:
+          Provider.of<UserProvider>(context).user.token.isNotEmpty
+              ? const BottomBar()
+              : const AuthScreen(),
     );
   }
 }

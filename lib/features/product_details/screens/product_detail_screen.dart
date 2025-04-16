@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dacn1/common/widgets/custom_button.dart';
 import 'package:dacn1/common/widgets/start.dart';
 import 'package:dacn1/contants/global_variables.dart';
+import 'package:dacn1/features/product_details/services/product_detail_services.dart';
 import 'package:dacn1/models/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -11,15 +12,19 @@ class ProductDetailScreen extends StatefulWidget {
   //   import class product
   final Product product;
 
-  const ProductDetailScreen({super.key, this.product});
+  const ProductDetailScreen({super.key, required this.product});
 
   @override
   State<ProductDetailScreen> createState() => _ProductDetailScreenState();
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  final ProductDetailsServices productDetailsServices =
+      ProductDetailsServices();
+  double avgRating = 0;
+  double myRating = 0;
   void navigateToSearchSreen(String query) {
-    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+    // Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
   @override
