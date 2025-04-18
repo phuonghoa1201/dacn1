@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class ProductDetailsServices {
+  String uri = GlobalVariables.uri;
   void addToCart({
     required BuildContext context,
     required Product product,

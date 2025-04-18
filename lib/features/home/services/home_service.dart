@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class HomeServices {
+  String uri = GlobalVariables.uri;
   Future<Product> fetchDealOfDay({required BuildContext context}) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     Product product = Product(

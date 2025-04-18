@@ -1,5 +1,4 @@
 import 'package:dacn1/features/auth/screens/auth_screen.dart';
-import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/router.dart';
@@ -8,7 +7,11 @@ import 'package:dacn1/providers/user_providers.dart';
 import 'package:dacn1/features/auth/services/auth_service.dart';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
 
-void main() {
+import 'features/admin/screens/admin_screen.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await GlobalVariables.initialize(); // Khởi tạo URI trước
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
@@ -53,9 +56,12 @@ class _MyAppState extends State<MyApp> {
         useMaterial3: true, // can remove this line
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
+
       home:
           Provider.of<UserProvider>(context).user.token.isNotEmpty
-              ? const BottomBar()
+              ? Provider.of<UserProvider>(context).user.type == 'user'
+                  ? const BottomBar()
+                  : const AdminScreen()
               : const AuthScreen(),
     );
   }

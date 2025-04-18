@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class Product {
@@ -9,7 +10,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
-  final String? userId;
+  // final String? userId;
   Product({
     required this.name,
     required this.description,
@@ -18,7 +19,7 @@ class Product {
     required this.category,
     required this.price,
     this.id,
-    this.userId,
+    // this.userId,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,22 +31,22 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
-      'userId': userId,
+      // 'userId': userId,
     };
   }
 
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      name: map['name'] as String,
-      description: map['description'] as String,
-      quantity: map['quantity'] as double,
-      images: List<String>.from((map['images'] as List<String>)),
-      category: map['category'] as String,
-      price: map['price'] as double,
+      name: map['name'] ?? '',
+      description: map['description'] ?? '',
+      quantity: (map['quantity'] ?? 0).toDouble(),
+      images: List<String>.from(map['images']),
+      category: map['category'] ?? '',
+      price: (map['price'] ?? 0).toDouble(),
       id: map['_id'] != null ? map['_id'] as String : null,
-      userId: map['userId'] != null ? map['userId'] as String : null,
     );
   }
+
 
   String toJson() => json.encode(toMap());
 

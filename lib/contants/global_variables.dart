@@ -1,8 +1,42 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
-String uri = 'http://localhost:3000';
+import 'package:flutter/material.dart';
+import 'package:network_info_plus/network_info_plus.dart';
+
+// Khai báo biến global nhưng chưa khởi tạo ngay
+// String uri = 'http://192.168.56.1:3000';
 
 class GlobalVariables {
+  static String? _uri = '';
+
+  // Phương thức khởi tạo URI
+  static Future<void> initialize() async {
+    try {
+      final info = NetworkInfo();
+      final wifiIP = await info.getWifiIP();
+
+      if (wifiIP == null || wifiIP.isEmpty) {
+        throw Exception('Không lấy được địa chỉ IP');
+      }
+
+      _uri = 'http://$wifiIP:3000'; // Thêm scheme (http) và port
+      print('URI đã khởi tạo: $_uri');
+    } catch (e) {
+      print('Lỗi khi khởi tạo URI: $e');
+      _uri = 'http://192.168.1.7:3000'; // Fallback URI
+    }
+  }
+
+  // Getter để truy cập URI an toàn
+  static String get uri {
+    if (_uri == null) {
+      throw Exception(
+        'URI chưa được khởi tạo. Gọi GlobalVariables.initialize() trước',
+      );
+    }
+    return _uri!;
+  }
+
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
@@ -28,25 +62,10 @@ class GlobalVariables {
   ];
 
   static const List<Map<String, String>> categoryImages = [
-    {
-      'title': 'Mobiles',
-      'image': 'assets/images/mobiles.jpeg',
-    },
-    {
-      'title': 'Essentials',
-      'image': 'assets/images/essentials.jpeg',
-    },
-    {
-      'title': 'Appliances',
-      'image': 'assets/images/appliances.jpeg',
-    },
-    {
-      'title': 'Books',
-      'image': 'assets/images/books.jpeg',
-    },
-    {
-      'title': 'Fashion',
-      'image': 'assets/images/fashion.jpeg',
-    },
+    {'title': 'Mobiles', 'image': 'assets/images/mobiles.jpeg'},
+    {'title': 'Essentials', 'image': 'assets/images/essentials.jpeg'},
+    {'title': 'Appliances', 'image': 'assets/images/appliances.jpeg'},
+    {'title': 'Books', 'image': 'assets/images/books.jpeg'},
+    {'title': 'Fashion', 'image': 'assets/images/fashion.jpeg'},
   ];
 }

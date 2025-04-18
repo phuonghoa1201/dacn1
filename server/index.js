@@ -2,9 +2,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const adminRouter = require("./routes/admin");
 //import other file
 const authRouter = require("./routes/auth");
-
+const productRouter = require("./routes/product");
 
 //init
 const PORT = 3000;
@@ -18,7 +19,8 @@ const DB =
 app.use(cors());
 app.use(express.json());
 app.use(authRouter);
-
+app.use(adminRouter);
+app.use(productRouter);
 
 //Connections
 mongoose.connect(DB).then(() => {
