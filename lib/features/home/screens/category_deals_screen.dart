@@ -1,4 +1,5 @@
 import 'package:dacn1/features/home/services/home_services.dart';
+import 'package:dacn1/features/product_details/screens/product_detail_screen.dart';
 import 'package:dacn1/models/product.dart';
 import 'package:flutter/material.dart';
 
@@ -71,25 +72,35 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                           ),
                       itemBuilder: (context, index) {
                         final product = productList![index];
-                        return Column(
-                          children: [
-                            SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: DecoratedBox(
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.black12,
-                                    width: 0.5,
+                        return GestureDetector(
+                          onTap:
+                              () => {
+                                Navigator.pushNamed(
+                                  context,
+                                  ProductDetailScreen.routeName,
+                                  arguments: product,
+                                ),
+                              },
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                height: 150,
+                                width: 150,
+                                child: DecoratedBox(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: Colors.black12,
+                                      width: 0.5,
+                                    ),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10),
+                                    child: Image.network(product.images[0]),
                                   ),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(10),
-                                  child: Image.network(product.images[0]),
-                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       },
                     ),

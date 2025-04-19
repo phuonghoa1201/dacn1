@@ -11,6 +11,7 @@ import '../../models/product.dart';
 import '../../providers/user_providers.dart';
 
 class SearchServices {
+  // String uri = GlobalVariables.uri;
   Future<List<Product>> fetchSearchedProduct({
     required BuildContext context,
     required String searchQuery,
@@ -32,11 +33,7 @@ class SearchServices {
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
-              Product.fromJson(
-                jsonEncode(
-                  jsonDecode(res.body)[i],
-                ),
-              ),
+              Product.fromJson(jsonEncode(jsonDecode(res.body)[i])),
             );
           }
         },

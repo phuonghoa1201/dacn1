@@ -1,8 +1,12 @@
+import 'package:dacn1/features/cart/screens/cart_screen.dart';
 import 'package:dacn1/features/home/screens/home_screen.dart';
+import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:dacn1/features/account/screens/account_screen.dart';
+import 'package:provider/provider.dart';
+
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
 
@@ -20,7 +24,7 @@ class _BottomBarState extends State<BottomBar> {
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
-    Center(child: Text("CartScreen")),
+    const CartScreen(),
   ];
 
   void updatePage(int index) {
@@ -31,6 +35,7 @@ class _BottomBarState extends State<BottomBar> {
 
   @override
   Widget build(BuildContext context) {
+    final userCartLen = context.watch<UserProvider>().user.cart.length;
     return Scaffold(
       body: pages[_page],
       bottomNavigationBar: BottomNavigationBar(
@@ -48,16 +53,15 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 0
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 0
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.home_outlined,
-              ),
+              child: const Icon(Icons.home_outlined),
             ),
             label: '',
           ),
@@ -68,16 +72,15 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 1
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 1
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
-              child: const Icon(
-                Icons.person_outline_outlined,
-              ),
+              child: const Icon(Icons.person_outline_outlined),
             ),
             label: '',
           ),
@@ -88,9 +91,10 @@ class _BottomBarState extends State<BottomBar> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    color: _page == 2
-                        ? GlobalVariables.selectedNavBarColor
-                        : GlobalVariables.backgroundColor,
+                    color:
+                        _page == 2
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
@@ -98,17 +102,15 @@ class _BottomBarState extends State<BottomBar> {
               child: Badge(
                 child: badges.Badge(
                   position: badges.BadgePosition.topEnd(top: -12, end: -12),
-                  badgeContent: const Text(
-                    '2',
+                  badgeContent: Text(
+                    userCartLen.toString(),
                     style: TextStyle(color: Colors.black), // hoặc màu bạn muốn
                   ),
                   badgeStyle: badges.BadgeStyle(
                     badgeColor: Colors.white,
                     elevation: 0,
                   ),
-                  child: const Icon(
-                    Icons.shopping_cart_outlined,
-                  ),
+                  child: const Icon(Icons.shopping_cart_outlined),
                 ),
               ),
             ),
