@@ -13,7 +13,7 @@ import 'package:dacn1/contants/utils.dart';
 import 'package:dacn1/providers/user_providers.dart';
 
 class AuthService {
-  String uri = GlobalVariables.uri;
+  // String uri = GlobalVariables.uri;
   // SIGN UP
   void signUpUser({
     required BuildContext context,
@@ -30,7 +30,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
-        // cart: [],
+        cart: [],
       );
 
       http.Response res = await http.post(

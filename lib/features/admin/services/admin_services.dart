@@ -13,7 +13,7 @@ import '../../../models/product.dart';
 import '../../../providers/user_providers.dart';
 
 class AdminServices {
-  String uri = GlobalVariables.uri;
+  // String uri = GlobalVariables.uri;
   void sellProduct({
     required BuildContext context,
     required String name,

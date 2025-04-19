@@ -4,13 +4,14 @@ import 'package:dacn1/contants/error_handling.dart';
 import 'package:dacn1/contants/global_variables.dart';
 import 'package:dacn1/contants/utils.dart';
 import 'package:dacn1/models/product.dart';
+import 'package:dacn1/models/user.dart';
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class ProductDetailsServices {
-  String uri = GlobalVariables.uri;
+  // String uri = GlobalVariables.uri;
   void addToCart({
     required BuildContext context,
     required Product product,
@@ -31,10 +32,10 @@ class ProductDetailsServices {
         response: res,
         context: context,
         onSuccess: () {
-          // User user = userProvider.user.copyWith(
-          //   cart: jsonDecode(res.body)['cart'],
-          // );
-          // userProvider.setUserFromModel(user);
+          User user = userProvider.user.copyWith(
+            cart: jsonDecode(res.body)['cart'],
+          );
+          userProvider.setUserFromModel(user);
         },
       );
     } catch (e) {
@@ -42,33 +43,29 @@ class ProductDetailsServices {
     }
   }
 
-  // void rateProduct({
-  //   required BuildContext context,
-  //   required Product product,
-  //   required double rating,
-  // }) async {
-  //   final userProvider = Provider.of<UserProvider>(context, listen: false);
+  void rateProduct({
+    required BuildContext context,
+    required Product product,
+    required double rating,
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
 
-  //   try {
-  //     http.Response res = await http.post(
-  //       Uri.parse('$uri/api/rate-product'),
-  //       headers: {
-  //         'Content-Type': 'application/json; charset=UTF-8',
-  //         'x-auth-token': userProvider.user.token,
-  //       },
-  //       body: jsonEncode({
-  //         'id': product.id!,
-  //         'rating': rating,
-  //       }),
-  //     );
+    try {
+      http.Response res = await http.post(
+        Uri.parse('$uri/api/rate-product'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: jsonEncode({'id': product.id!, 'rating': rating}),
+      );
 
-  //     httpErrorHandle(
-  //       response: res,
-  //       context: context,
-  //       onSuccess: () {},
-  //     );
-  //   } catch (e) {
-  //     showSnackBar(context, e.toString());
-  //   }
-  // }
+      httpErrorHandle(response: res, context: context, onSuccess: () {});
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 }
+
+
+// 7:32:33

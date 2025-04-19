@@ -2,10 +2,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:dacn1/common/widgets/custom_button.dart';
 import 'package:dacn1/common/widgets/start.dart';
 import 'package:dacn1/contants/global_variables.dart';
+import 'package:dacn1/features/product_details/services/product_detail_services.dart';
 import 'package:dacn1/models/product.dart';
+import 'package:dacn1/providers/user_providers.dart';
 import 'package:dacn1/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const String routeName = '/product-details';
@@ -19,8 +22,34 @@ class ProductDetailScreen extends StatefulWidget {
 }
 
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
+  final ProductDetailsServices pds = ProductDetailsServices();
+  double avgRating = 0.0;
+  double myRating = 0.0;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    double totalRating = 0.0;
+    for (int i = 0; i < widget.product.rating!.length; i++) {
+      totalRating += widget.product.rating![i].rating;
+      if (widget.product.rating![i].userId ==
+          Provider.of<UserProvider>(context, listen: false).user.id) {
+        myRating = widget.product.rating![i].rating;
+      }
+    }
+
+    if (totalRating != 0) {
+      avgRating = totalRating / widget.product.rating!.length;
+    }
+  }
+
   void navigateToSearchSreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
+  void addToCart() {
+    pds.addToCart(context: context, product: widget.product);
   }
 
   @override
@@ -98,7 +127,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(widget.product.id!), const Stars(rating: 4)],
+                children: [Text(widget.product.id!), Stars(rating: avgRating)],
               ),
             ),
             Padding(
@@ -113,8 +142,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   widget.product.images.map((i) {
                     return Builder(
                       builder:
-                          (BuildContext context) =>
-                              Image.network(i, fit: BoxFit.cover, height: 200),
+                          (BuildContext context) => Image.network(
+                            i,
+                            fit: BoxFit.contain,
+                            height: 200,
+                          ),
                     );
                   }).toList(),
               options: CarouselOptions(viewportFraction: 1, height: 300),
@@ -157,7 +189,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               padding: const EdgeInsets.all(10),
               child: CustomButton(
                 text: 'Add to Cart',
-                onTap: () {},
+                onTap: addToCart,
                 color: Color.fromRGBO(254, 216, 19, 1),
               ),
             ),
@@ -171,10 +203,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
             RatingBar.builder(
+              initialRating: myRating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
               itemBuilder:
                   (context, _) =>
                       Icon(Icons.star, color: GlobalVariables.secondaryColor),
-              onRatingUpdate: (rating) {},
+              onRatingUpdate: (rating) {
+                pds.rateProduct(
+                  context: context,
+                  product: widget.product,
+                  rating: rating,
+                );
+                print(rating);
+              },
             ),
           ],
         ),

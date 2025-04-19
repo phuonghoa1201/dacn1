@@ -10,8 +10,8 @@ import 'package:dacn1/common/widgets/bottom_bar.dart';
 import 'features/admin/screens/admin_screen.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await GlobalVariables.initialize(); // Khởi tạo URI trước
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await GlobalVariables.initialize(); // Khởi tạo URI trước
   runApp(
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => UserProvider())],
