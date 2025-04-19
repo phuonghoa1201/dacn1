@@ -18,11 +18,13 @@ class HomeServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
-      http.Response res = await http
-          .get(Uri.parse('$uri/api/products?category=$category'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
-      });
+      http.Response res = await http.get(
+        Uri.parse('$uri/api/products?category=$category'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
 
       httpErrorHandle(
         response: res,
@@ -30,11 +32,7 @@ class HomeServices {
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
-              Product.fromJson(
-                jsonEncode(
-                  jsonDecode(res.body)[i],
-                ),
-              ),
+              Product.fromJson(jsonEncode(jsonDecode(res.body)[i])),
             );
           }
         },
@@ -45,9 +43,7 @@ class HomeServices {
     return productList;
   }
 
-  Future<Product> fetchDealOfDay({
-    required BuildContext context,
-  }) async {
+  Future<Product> fetchDealOfDay({required BuildContext context}) async {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     Product product = Product(
       name: '',
@@ -59,11 +55,13 @@ class HomeServices {
     );
 
     try {
-      http.Response res =
-      await http.get(Uri.parse('$uri/api/deal-of-day'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
-      });
+      http.Response res = await http.get(
+        Uri.parse('$uri/api/deal-of-day'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
 
       httpErrorHandle(
         response: res,

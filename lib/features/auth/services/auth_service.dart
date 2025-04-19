@@ -14,6 +14,7 @@ import 'package:dacn1/contants/utils.dart';
 import 'package:dacn1/providers/user_providers.dart';
 
 class AuthService {
+  // String uri = GlobalVariables.uri;
   // SIGN UP
   void signUpUser({
     required BuildContext context,
@@ -30,7 +31,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
-        // cart: [],
+        cart: [],
       );
 
       http.Response res = await http.post(
@@ -96,7 +97,7 @@ class AuthService {
             Navigator.pushNamedAndRemoveUntil(
               context,
               BottomBar.routeName,
-                  (route) => false,
+              (route) => false,
             );
           }
         },
@@ -105,7 +106,6 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
-
 
   // get user data
   void getUserData(BuildContext context) async {

@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'dart:ffi';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dacn1/models/rating.dart';
+
 class Product {
   final String name;
   final String description;
@@ -10,7 +10,7 @@ class Product {
   final String category;
   final double price;
   final String? id;
-  // final String? userId;
+  final List<Rating>? rating;
   Product({
     required this.name,
     required this.description,
@@ -19,11 +19,11 @@ class Product {
     required this.category,
     required this.price,
     this.id,
-    // this.userId,
+    this.rating,
   });
 
   Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+    return {
       'name': name,
       'description': description,
       'quantity': quantity,
@@ -31,7 +31,7 @@ class Product {
       'category': category,
       'price': price,
       'id': id,
-      // 'userId': userId,
+      'rating': rating,
     };
   }
 
@@ -39,17 +39,20 @@ class Product {
     return Product(
       name: map['name'] ?? '',
       description: map['description'] ?? '',
-      quantity: (map['quantity'] ?? 0).toDouble(),
+      quantity: map['quantity']?.toDouble() ?? 0.0,
       images: List<String>.from(map['images']),
       category: map['category'] ?? '',
-      price: (map['price'] ?? 0).toDouble(),
-      id: map['_id'] != null ? map['_id'] as String : null,
+      price: map['price']?.toDouble() ?? 0.0,
+      id: map['_id'],
+      rating:
+          (map['ratings'] as List<dynamic>?)
+              ?.map((x) => Rating.fromMap(x))
+              .toList(),
     );
   }
-
 
   String toJson() => json.encode(toMap());
 
   factory Product.fromJson(String source) =>
-      Product.fromMap(json.decode(source) as Map<String, dynamic>);
+      Product.fromMap(json.decode(source));
 }

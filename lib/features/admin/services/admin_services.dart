@@ -13,6 +13,10 @@ import '../../../models/product.dart';
 import '../../../providers/user_providers.dart';
 
 class AdminServices {
+<<<<<<< Updated upstream
+=======
+  // String uri = GlobalVariables.uri;
+>>>>>>> Stashed changes
   void sellProduct({
     required BuildContext context,
     required String name,
