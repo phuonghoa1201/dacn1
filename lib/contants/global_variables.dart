@@ -7,35 +7,6 @@ import 'package:network_info_plus/network_info_plus.dart';
 String uri = 'http://192.168.56.1:3000';
 
 class GlobalVariables {
-  // static String? _uri = '';
-
-  // // Phương thức khởi tạo URI
-  // static Future<void> initialize() async {
-  //   try {
-  //     final info = NetworkInfo();
-  //     final wifiIP = await info.getWifiIP();
-
-  //     if (wifiIP == null || wifiIP.isEmpty) {
-  //       throw Exception('Không lấy được địa chỉ IP');
-  //     }
-
-  //     _uri = 'http://$wifiIP:3000'; // Thêm scheme (http) và port
-  //     print('URI đã khởi tạo: $_uri');
-  //   } catch (e) {
-  //     print('Lỗi khi khởi tạo URI: $e');
-  //     _uri = 'http://192.168.1.7:3000'; // Fallback URI
-  //   }
-  // }
-
-  // // Getter để truy cập URI an toàn
-  // static String get uri {
-  //   if (_uri == null) {
-  //     throw Exception(
-  //       'URI chưa được khởi tạo. Gọi GlobalVariables.initialize() trước',
-  //     );
-  //   }
-  //   return _uri!;
-  // }
 
   // COLORS
   static const appBarGradient = LinearGradient(
