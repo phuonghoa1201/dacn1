@@ -11,6 +11,7 @@ import '../../models/product.dart';
 import '../../providers/user_providers.dart';
 
 class SearchServices {
+  // String uri = GlobalVariables.uri;
   Future<List<Product>> fetchSearchedProduct({
     required BuildContext context,
     required String searchQuery,

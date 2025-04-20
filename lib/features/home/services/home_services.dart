@@ -11,6 +11,7 @@ import '../../../contants/utils.dart';
 import '../../../providers/user_providers.dart';
 
 class HomeServices {
+  // String uri = GlobalVariables.uri;
   Future<List<Product>> fetchCategoryProducts({
     required BuildContext context,
     required String category,
