@@ -65,8 +65,9 @@ class _AuthScreenState extends State<AuthScreen> {
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
-
-              const SizedBox(height: 12), // Khoảng cách nhỏ giữa Welcome và logo
+              const SizedBox(
+                height: 12,
+              ), // Khoảng cách nhỏ giữa Welcome và logo
               Image.asset(
                 'assets/images/Tech_Zone.png',
                 width: 250,
@@ -159,5 +160,3 @@ class _AuthScreenState extends State<AuthScreen> {
     );
   }
 }
-
-

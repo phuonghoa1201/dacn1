@@ -13,6 +13,7 @@ import '../../../models/product.dart';
 import '../../../providers/user_providers.dart';
 
 class AdminServices {
+  // String uri = GlobalVariables.uri;
   void sellProduct({
     required BuildContext context,
     required String name,
@@ -71,11 +72,13 @@ class AdminServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
-      http.Response res =
-      await http.get(Uri.parse('$uri/admin/get-products'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
-      });
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/get-products'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
 
       httpErrorHandle(
         response: res,
@@ -83,11 +86,7 @@ class AdminServices {
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
-              Product.fromJson(
-                jsonEncode(
-                  jsonDecode(res.body)[i],
-                ),
-              ),
+              Product.fromJson(jsonEncode(jsonDecode(res.body)[i])),
             );
           }
         },
@@ -112,9 +111,7 @@ class AdminServices {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
-        body: jsonEncode({
-          'id': product.id,
-        }),
+        body: jsonEncode({'id': product.id}),
       );
 
       httpErrorHandle(

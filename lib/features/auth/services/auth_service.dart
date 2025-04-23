@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:dacn1/common/widgets/bottom_bar.dart';
 import 'package:dacn1/features/admin/screens/admin_screen.dart';
-import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -14,6 +13,7 @@ import 'package:dacn1/contants/utils.dart';
 import 'package:dacn1/providers/user_providers.dart';
 
 class AuthService {
+  // String uri = GlobalVariables.uri;
   // SIGN UP
   void signUpUser({
     required BuildContext context,
@@ -30,7 +30,7 @@ class AuthService {
         address: '',
         type: '',
         token: '',
-        // cart: [],
+        cart: [],
       );
 
       http.Response res = await http.post(
@@ -96,7 +96,7 @@ class AuthService {
             Navigator.pushNamedAndRemoveUntil(
               context,
               BottomBar.routeName,
-                  (route) => false,
+              (route) => false,
             );
           }
         },
@@ -105,7 +105,6 @@ class AuthService {
       showSnackBar(context, e.toString());
     }
   }
-
 
   // get user data
   void getUserData(BuildContext context) async {
