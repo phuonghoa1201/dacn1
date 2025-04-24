@@ -8,7 +8,6 @@ import 'package:dacn1/features/auth/services/auth_service.dart';
 
 import '../../../search/screens/search_screen.dart';
 
-
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
   const HomeScreen({Key? key}) : super(key: key);
@@ -49,9 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         prefixIcon: InkWell(
                           onTap: () {},
                           child: const Padding(
-                            padding: EdgeInsets.only(
-                              left: 6,
-                            ),
+                            padding: EdgeInsets.only(left: 6),
                             child: Icon(
                               Icons.search,
                               color: Colors.black,
@@ -63,15 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         fillColor: Colors.white,
                         contentPadding: const EdgeInsets.only(top: 10),
                         border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7),
-                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(7)),
                           borderSide: BorderSide.none,
                         ),
                         enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7),
-                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(7)),
                           borderSide: BorderSide(
                             color: Colors.black38,
                             width: 1,

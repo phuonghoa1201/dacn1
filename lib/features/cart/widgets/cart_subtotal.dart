@@ -1,5 +1,6 @@
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CartSubtotal extends StatelessWidget {
@@ -10,7 +11,7 @@ class CartSubtotal extends StatelessWidget {
     final user = context.watch<UserProvider>().user;
     double sum = 0.0;
     user.cart
-        .map((e) => sum += e['quantity'] * e['product']['price'] as double)
+        .map((e) => sum += e['quantity'] * e['product']['price'] as int)
         .toList();
 
     return Container(
@@ -19,7 +20,7 @@ class CartSubtotal extends StatelessWidget {
         children: [
           Text('Subtotal ', style: TextStyle(fontSize: 20)),
           Text(
-            '\$${sum}',
+            '${NumberFormat('#,###').format(sum)} vnđ',
             style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
         ],

@@ -12,8 +12,8 @@ class Rating {
 
   factory Rating.fromMap(Map<String, dynamic> map) {
     return Rating(
-      userId: map['userId'] as String,
-      rating: (map['rating'] as num).toDouble(),
+      userId: map['userId'] ?? '',
+      rating: map['rating']?.toDouble() ?? 0.0,
     );
   }
 
