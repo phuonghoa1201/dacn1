@@ -4,6 +4,7 @@ import 'package:dacn1/features/product_details/services/product_detail_services.
 import 'package:dacn1/models/product.dart';
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CartProduct extends StatefulWidget {
@@ -58,7 +59,7 @@ class _CartProductState extends State<CartProduct> {
                       width: 235,
                       padding: const EdgeInsets.only(left: 10, top: 5),
                       child: Text(
-                        '${product.price} vnđ',
+                        '${NumberFormat('#,###').format(product.price)} vnđ',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
