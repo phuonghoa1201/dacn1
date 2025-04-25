@@ -133,8 +133,8 @@ class AdminServices {
     required String? id,
     required String name,
     required String description,
-    required double price,
-    required double quantity,
+    required int price,
+    required int quantity,
     required String category,
     required List<File> newImages,
     required List<String> existingImages
