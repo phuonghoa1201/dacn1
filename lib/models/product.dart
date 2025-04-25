@@ -5,10 +5,10 @@ import 'package:dacn1/models/rating.dart';
 class Product {
   final String name;
   final String description;
-  final double quantity;
+  final int quantity;
   final List<String> images;
   final String category;
-  final double price;
+  final int price;
   final String? id;
   final List<Rating>? rating;
   Product({
@@ -39,15 +39,15 @@ class Product {
     return Product(
       name: map['name'] ?? '',
       description: map['description'] ?? '',
-      quantity: map['quantity']?.toDouble() ?? 0.0,
+      quantity: map['quantity']?.toInt() ?? 0,
       images: List<String>.from(map['images']),
       category: map['category'] ?? '',
-      price: map['price']?.toDouble() ?? 0.0,
+      price: map['price']?.toInt() ?? 0,
       id: map['_id'],
       rating:
-          (map['ratings'] as List<dynamic>?)
-              ?.map((x) => Rating.fromMap(x))
-              .toList(),
+          map['ratings'] != null
+              ? List<Rating>.from(map['ratings']?.map((x) => Rating.fromMap(x)))
+              : null,
     );
   }
 

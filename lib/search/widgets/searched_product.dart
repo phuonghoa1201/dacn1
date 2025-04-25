@@ -1,5 +1,6 @@
 import 'package:dacn1/common/widgets/start.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../models/product.dart';
 
@@ -47,7 +48,7 @@ class SearchedProduct extends StatelessWidget {
                       width: 235,
                       padding: const EdgeInsets.only(left: 10, top: 5),
                       child: Text(
-                        '\$${product.price}',
+                        '${NumberFormat('#,###').format(product.price)} vnđ',
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,

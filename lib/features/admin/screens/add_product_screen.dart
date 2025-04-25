@@ -99,9 +99,9 @@ class _AddProductScreenState extends State<AddProductScreen> {
         context: context,
         name: productNameController.text,
         description: descriptionController.text,
-        price: double.parse(priceController.text),
-        quantity: double.parse(quantityController.text),
         category: category!,
+        price: int.parse(priceController.text),
+        quantity: int.parse(quantityController.text),
         images: images,
       );
     } else {

@@ -10,6 +10,7 @@ import 'package:dacn1/providers/user_providers.dart';
 import 'package:dacn1/search/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailScreen extends StatefulWidget {
@@ -166,7 +167,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   ),
                   children: [
                     TextSpan(
-                      text: '\$${widget.product.price}',
+                      text:
+                          '${NumberFormat('#,###').format(widget.product.price)} vnđ',
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.red,
