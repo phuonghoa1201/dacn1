@@ -48,49 +48,60 @@ class _PostsScreenState extends State<PostsScreen> {
     return products == null
         ? const Loader()
         : Scaffold(
-      body: GridView.builder(
-        itemCount: products!.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2),
-        itemBuilder: (context, index) {
-          final productData = products![index];
-          return Column(
-            children: [
-              SizedBox(
-                height: 140,
-                child: SingleProduct(
-                  image: productData.images[0],
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          body: GridView.builder(
+            itemCount: products!.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+            ),
+            itemBuilder: (context, index) {
+              final productData = products![index];
+              return Column(
                 children: [
-                  Expanded(
-                    child: Text(
-                      productData.name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
+                  SizedBox(
+                    height: 140,
+                    child: SingleProduct(image: productData.images[0]),
                   ),
-                  IconButton(
-                    onPressed: () => deleteProduct(productData, index),
-                    icon: const Icon(
-                      Icons.delete_outline,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          productData.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () => deleteProduct(productData, index),
+                        icon: const Icon(Icons.delete_outline),
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pushNamed(
+                            context,
+                            AddProductScreen.routeName,
+                            arguments: {
+                              'product': productData,
+                              'isEditing': true,
+                            },
+                          );
+                        },
+                        icon: const Icon(Icons.edit),
+                      ),
+
+                    ],
                   ),
                 ],
-              ),
-            ],
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: navigateToAddProduct,
-        tooltip: 'Add a Product',
-      ),
-      floatingActionButtonLocation:
-      FloatingActionButtonLocation.centerFloat,
-    );
+              );
+            },
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: navigateToAddProduct,
+            tooltip: 'Add a Product',
+          ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+        );
   }
 }

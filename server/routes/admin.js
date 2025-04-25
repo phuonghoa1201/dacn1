@@ -45,6 +45,38 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
   }
 });
 
+//Update product
+adminRouter.put("/admin/update-product/:id", admin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, description, images, quantity, price, category } = req.body;
+
+
+    const existingProduct = await Product.findById(id);
+    if (!existingProduct) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      id,
+      {
+        name,
+        description,
+        images: images?.length ? images : existingProduct.images,
+        quantity,
+        price,
+        category,
+      },
+      { new: true }
+    );
+
+    res.json(updatedProduct);
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+
 //adminRouter.get("/admin/get-orders", admin, async (req, res) => {
 //  try {
 //    const orders = await Order.find({});

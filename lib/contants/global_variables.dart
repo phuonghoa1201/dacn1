@@ -1,7 +1,10 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:network_info_plus/network_info_plus.dart';
 String uri = 'http://192.168.100.12:3000';
 class GlobalVariables {
+
   // COLORS
   static const appBarGradient = LinearGradient(
     colors: [
@@ -27,25 +30,10 @@ class GlobalVariables {
   ];
 
   static const List<Map<String, String>> categoryImages = [
-    {
-      'title': 'Mobiles',
-      'image': 'assets/images/mobiles.jpeg',
-    },
-    {
-      'title': 'Essentials',
-      'image': 'assets/images/essentials.jpeg',
-    },
-    {
-      'title': 'Appliances',
-      'image': 'assets/images/appliances.jpeg',
-    },
-    {
-      'title': 'Books',
-      'image': 'assets/images/books.jpeg',
-    },
-    {
-      'title': 'Fashion',
-      'image': 'assets/images/fashion.jpeg',
-    },
+    {'title': 'Mobiles', 'image': 'assets/images/mobiles.jpeg'},
+    {'title': 'Essentials', 'image': 'assets/images/essentials.jpeg'},
+    {'title': 'Appliances', 'image': 'assets/images/appliances.jpeg'},
+    {'title': 'Books', 'image': 'assets/images/books.jpeg'},
+    {'title': 'Fashion', 'image': 'assets/images/fashion.jpeg'},
   ];
 }

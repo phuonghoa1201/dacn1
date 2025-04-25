@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:cloudinary_public/cloudinary_public.dart';
@@ -13,6 +14,7 @@ import '../../../models/product.dart';
 import '../../../providers/user_providers.dart';
 
 class AdminServices {
+  // String uri = GlobalVariables.uri;
   void sellProduct({
     required BuildContext context,
     required String name,
@@ -71,11 +73,13 @@ class AdminServices {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Product> productList = [];
     try {
-      http.Response res =
-      await http.get(Uri.parse('$uri/admin/get-products'), headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
-      });
+      http.Response res = await http.get(
+        Uri.parse('$uri/admin/get-products'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+      );
 
       httpErrorHandle(
         response: res,
@@ -83,11 +87,7 @@ class AdminServices {
         onSuccess: () {
           for (int i = 0; i < jsonDecode(res.body).length; i++) {
             productList.add(
-              Product.fromJson(
-                jsonEncode(
-                  jsonDecode(res.body)[i],
-                ),
-              ),
+              Product.fromJson(jsonEncode(jsonDecode(res.body)[i])),
             );
           }
         },
@@ -112,9 +112,7 @@ class AdminServices {
           'Content-Type': 'application/json; charset=UTF-8',
           'x-auth-token': userProvider.user.token,
         },
-        body: jsonEncode({
-          'id': product.id,
-        }),
+        body: jsonEncode({'id': product.id}),
       );
 
       httpErrorHandle(
@@ -122,6 +120,62 @@ class AdminServices {
         context: context,
         onSuccess: () {
           onSuccess();
+        },
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
+
+  void updateProduct({
+    required BuildContext context,
+    required String? id,
+    required String name,
+    required String description,
+    required double price,
+    required double quantity,
+    required String category,
+    required List<File> newImages,
+    required List<String> existingImages
+  }) async {
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
+
+    try {
+      final cloudinary = CloudinaryPublic('dpus9dqwv', 'uszbstnu');
+      List<String> imageUrls = [];
+
+      for (int i = 0; i < newImages.length; i++) {
+        CloudinaryResponse res = await cloudinary.uploadFile(
+          CloudinaryFile.fromFile(newImages[i].path, folder: name),
+        );
+        imageUrls.add(res.secureUrl);
+      }
+
+      Product product = Product(
+        id: id,
+        name: name,
+        description: description,
+        quantity: quantity,
+        images:  [...existingImages, ...imageUrls],
+        category: category,
+        price: price,
+      );
+
+      http.Response res = await http.put(
+        Uri.parse('$uri/admin/update-product/$id'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'x-auth-token': userProvider.user.token,
+        },
+        body: product.toJson(),
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          showSnackBar(context, 'Product Updated Successfully!');
         },
       );
     } catch (e) {

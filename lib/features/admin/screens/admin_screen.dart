@@ -1,7 +1,9 @@
 import 'package:dacn1/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../../contants/global_variables.dart';
+import '../../../providers/user_providers.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -29,6 +31,9 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context);
+    final userName = userProvider.user.name;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -54,11 +59,19 @@ class _AdminScreenState extends State<AdminScreen> {
                   fit: BoxFit.contain,
                 ),
               ),
-              const Text(
-                'Admin',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
+              Text(
+                'Hello, $userName!',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black87,
+                  shadows: [
+                    Shadow(
+                      blurRadius: 3,
+                      color: Colors.grey,
+                      offset: Offset(1, 1),
+                    ),
+                  ],
                 ),
               ),
             ],
