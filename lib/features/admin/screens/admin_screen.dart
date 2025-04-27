@@ -1,9 +1,11 @@
+import 'package:dacn1/features/admin/screens/order_screen.dart';
 import 'package:dacn1/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../contants/global_variables.dart';
 import '../../../providers/user_providers.dart';
+import 'analytics_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -19,8 +21,9 @@ class _AdminScreenState extends State<AdminScreen> {
 
   List<Widget> pages = [
     const PostsScreen(),
-    // const AnalyticsScreen(),
-    //   const OrdersScreen(),
+    const AnalyticsScreen(),
+    const OrderScreen()
+
   ];
 
   void updatePage(int page) {
@@ -121,7 +124,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                 ),
               ),
-              child: const Icon(Icons.analytics_outlined),
+              child: const Icon(Icons.insert_chart),
             ),
             label: '',
           ),
@@ -140,7 +143,7 @@ class _AdminScreenState extends State<AdminScreen> {
                   ),
                 ),
               ),
-              child: const Icon(Icons.all_inbox_outlined),
+              child: const Icon(Icons.receipt_long),
             ),
             label: '',
           ),
