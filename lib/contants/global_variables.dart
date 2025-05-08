@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
-String uri = 'http://192.168.100.12:3000';
+String uri = 'http://192.168.100.3:3000';
 class GlobalVariables {
 
   // COLORS

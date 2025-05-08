@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         hintText: 'Search what you want to find',
                         hintStyle: const TextStyle(
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w200,
                           fontSize: 17,
                         ),
                       ),

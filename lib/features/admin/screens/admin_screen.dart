@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../contants/global_variables.dart';
 import '../../../providers/user_providers.dart';
 import 'analytics_screen.dart';
+import 'package:dacn1/features/account/services/account_service.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -76,6 +77,12 @@ class _AdminScreenState extends State<AdminScreen> {
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(width: 10),
+              IconButton(
+                onPressed: () => AccountService().logOut(context),
+                icon: const Icon(Icons.logout, color: Colors.black87),
+                tooltip: 'Logout',
               ),
             ],
           ),

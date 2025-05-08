@@ -47,12 +47,38 @@ class _OrderScreenState extends State<OrderScreen> {
                   arguments: orderData,
                 );
               },
-              child: SizedBox(
-                height: 140,
-                child: SingleProduct(image: orderData.products[0].images[0]),
+              // child: SizedBox(
+              //   height: 140,
+              //   child: SingleProduct(image: orderData.products[0].images[0]),
+              // ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Image.network(
+                      orderData.products[0].images[0],
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: Text(
+                      'Đặt lúc: ${formatDate(DateTime.fromMillisecondsSinceEpoch(orderData.orderedAt))}',
+                      style: const TextStyle(fontSize: 12),
+                    ),
+                  ),
+                ],
               ),
+
             );
           },
         );
   }
+
+  String formatDate(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year} ${dateTime.hour}:${dateTime.minute.toString().padLeft(2, '0')}';
+  }
+
+
 }

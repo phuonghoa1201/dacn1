@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dacn1/features/account/widgets/account_button.dart';
+import 'package:dacn1/features/account/services/account_service.dart';
+
 
 class TopButtons extends StatelessWidget {
   const TopButtons({Key? key}) : super(key: key);
@@ -25,8 +27,7 @@ class TopButtons extends StatelessWidget {
           children: [
             AccountButton(
               text: 'Log Out',
-              // onTap: () => AccountServices().logOut(context),
-              onTap: () {},
+              onTap: () => AccountService().logOut(context),
             ),
             AccountButton(
               text: 'Your Wish List',
@@ -37,4 +38,5 @@ class TopButtons extends StatelessWidget {
       ],
     );
   }
+
 }

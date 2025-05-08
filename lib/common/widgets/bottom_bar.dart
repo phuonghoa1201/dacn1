@@ -1,4 +1,5 @@
 import 'package:dacn1/features/cart/screens/cart_screen.dart';
+import 'package:dacn1/features/chatbot/screens/chat_screen.dart';
 import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
@@ -7,31 +8,39 @@ import 'package:badges/badges.dart' as badges;
 import 'package:dacn1/features/account/screens/account_screen.dart';
 import 'package:provider/provider.dart';
 
+
 class BottomBar extends StatefulWidget {
   static const String routeName = '/actual-home';
 
+
   const BottomBar({Key? key}) : super(key: key);
+
 
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
+
 
 class _BottomBarState extends State<BottomBar> {
   int _page = 0;
   double bottomBarWidth = 42;
   double bottomBarBorderWidth = 5;
 
+
   List<Widget> pages = [
     const HomeScreen(),
     const AccountScreen(),
     const CartScreen(),
+    const ChatScreen(),
   ];
+
 
   void updatePage(int index) {
     setState(() {
       _page = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,16 +63,16 @@ class _BottomBarState extends State<BottomBar> {
                 border: Border(
                   top: BorderSide(
                     color:
-                        _page == 0
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
+                    _page == 0
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
               child: const Icon(Icons.home_outlined),
             ),
-            label: '',
+            label: 'Home',
           ),
           // ACCOUNT
           BottomNavigationBarItem(
@@ -73,16 +82,16 @@ class _BottomBarState extends State<BottomBar> {
                 border: Border(
                   top: BorderSide(
                     color:
-                        _page == 1
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
+                    _page == 1
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
               ),
               child: const Icon(Icons.person_outline_outlined),
             ),
-            label: '',
+            label: 'Order',
           ),
           // CART
           BottomNavigationBarItem(
@@ -92,9 +101,9 @@ class _BottomBarState extends State<BottomBar> {
                 border: Border(
                   top: BorderSide(
                     color:
-                        _page == 2
-                            ? GlobalVariables.selectedNavBarColor
-                            : GlobalVariables.backgroundColor,
+                    _page == 2
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
                     width: bottomBarBorderWidth,
                   ),
                 ),
@@ -114,7 +123,27 @@ class _BottomBarState extends State<BottomBar> {
                 ),
               ),
             ),
-            label: '',
+            label: 'Cart',
+          ),
+          //   CHATBOT
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color: _page == 3
+                        ? GlobalVariables.selectedNavBarColor
+                        : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(
+                Icons.support_agent,
+              ),
+            ),
+            label: 'Support',
           ),
         ],
       ),
