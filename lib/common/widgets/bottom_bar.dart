@@ -1,4 +1,5 @@
 import 'package:dacn1/features/cart/screens/cart_screen.dart';
+import 'package:dacn1/features/chatbot/screens/chat_screen.dart';
 import 'package:dacn1/features/home/screens/home_screen.dart';
 import 'package:dacn1/providers/user_providers.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +26,7 @@ class _BottomBarState extends State<BottomBar> {
     const HomeScreen(),
     const AccountScreen(),
     const CartScreen(),
+    const ChatScreen(),
   ];
 
   void updatePage(int index) {
@@ -63,7 +65,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: const Icon(Icons.home_outlined),
             ),
-            label: '',
+            label: 'Home',
           ),
           // ACCOUNT
           BottomNavigationBarItem(
@@ -82,7 +84,7 @@ class _BottomBarState extends State<BottomBar> {
               ),
               child: const Icon(Icons.person_outline_outlined),
             ),
-            label: '',
+            label: 'Order',
           ),
           // CART
           BottomNavigationBarItem(
@@ -113,6 +115,25 @@ class _BottomBarState extends State<BottomBar> {
                   child: const Icon(Icons.shopping_cart_outlined),
                 ),
               ),
+            ),
+            label: 'Cart',
+          ),
+          //   CHATBOT
+          BottomNavigationBarItem(
+            icon: Container(
+              width: bottomBarWidth,
+              decoration: BoxDecoration(
+                border: Border(
+                  top: BorderSide(
+                    color:
+                        _page == 2
+                            ? GlobalVariables.selectedNavBarColor
+                            : GlobalVariables.backgroundColor,
+                    width: bottomBarBorderWidth,
+                  ),
+                ),
+              ),
+              child: const Icon(Icons.support_agent_outlined),
             ),
             label: '',
           ),

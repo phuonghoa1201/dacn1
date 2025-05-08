@@ -7,12 +7,16 @@ const adminRouter = require("./routes/admin");
 const authRouter = require("./routes/auth");
 const productRouter = require("./routes/product");
 const userRouter = require("./routes/user");
+const chatRouter = require("./routes/chat");
+
 
 //init
 const PORT = 3000;
 const app = express();
 const DB =
- "mongodb+srv://anhngocthiduong:dacn123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+"mongodb+srv://anhngocthiduong:dacn123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+
 
 
 //middleware
@@ -23,19 +27,24 @@ app.use(authRouter);
 app.use(adminRouter);
 app.use(productRouter);
 app.use(userRouter);
+app.use(chatRouter);
+
 
 //Connections
 mongoose.connect(DB).then(() => {
-    console.log("Connection Successful");
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+   console.log("Connection Successful");
+ })
+ .catch((e) => {
+   console.log(e);
+ });
+
 
 app.listen(PORT,() => {
-    console.log('connected at port '+ PORT);
+   console.log('connected at port '+ PORT);
+
 
 });
+
 
 
 
