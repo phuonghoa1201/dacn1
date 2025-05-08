@@ -2,15 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:network_info_plus/network_info_plus.dart';
-<<<<<<< Updated upstream
 
 // Khai báo biến global nhưng chưa khởi tạo ngay
-String uri = 'http://192.168.56.1:3000';
-
-class GlobalVariables {
-=======
->>>>>>> Stashed changes
-
 String uri = 'http://192.168.56.1:3000';
 
 class GlobalVariables {
