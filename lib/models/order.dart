@@ -3,12 +3,15 @@ import 'dart:convert';
 
 import 'package:dacn1/models/product.dart';
 
+import '../features/admin/models/user.dart';
+
 class Order {
   final String id;
   final List<Product> products;
   final List<int> quantity;
   final String address;
-  final String userId;
+  // final String userId;
+  final User user;
   final int orderedAt;
   final int status;
   final int totalPrice;
@@ -17,7 +20,7 @@ class Order {
     required this.products,
     required this.quantity,
     required this.address,
-    required this.userId,
+    required this.user,
     required this.orderedAt,
     required this.status,
     required this.totalPrice,
@@ -29,7 +32,7 @@ class Order {
       'products': products.map((x) => x.toMap()).toList(),
       'quantity': quantity,
       'address': address,
-      'userId': userId,
+      'user': user,
       'orderedAt': orderedAt,
       'status': status,
       'totalPrice': totalPrice,
@@ -44,7 +47,7 @@ class Order {
       ),
       quantity: List<int>.from(map['products']?.map((x) => x['quantity'])),
       address: map['address'] ?? '',
-      userId: map['userId'] ?? '',
+      user: User.fromMap(map['userId']),
       orderedAt: map['orderedAt']?.toInt() ?? 0,
       status: map['status']?.toInt() ?? 0,
       totalPrice: map['totalPrice']?.toInt() ?? 0,

@@ -1,3 +1,4 @@
+import 'package:dacn1/contants/utils.dart';
 import 'package:dacn1/features/admin/screens/order_screen.dart';
 import 'package:dacn1/features/admin/screens/posts_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +24,7 @@ class _AdminScreenState extends State<AdminScreen> {
   List<Widget> pages = [
     const PostsScreen(),
     const AnalyticsScreen(),
-    const OrderScreen()
-
+    const OrderScreen(),
   ];
 
   void updatePage(int page) {
@@ -64,24 +64,20 @@ class _AdminScreenState extends State<AdminScreen> {
                 ),
               ),
               Text(
-                'Hello, $userName!',
+                'Hello, ' + capitalize('$userName') + '!',
                 style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black87,
-                  shadows: [
-                    Shadow(
-                      blurRadius: 3,
-                      color: Colors.grey,
-                      offset: Offset(1, 1),
-                    ),
-                  ],
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(width: 10),
               IconButton(
                 onPressed: () => AccountService().logOut(context),
-                icon: const Icon(Icons.logout, color: Colors.black87),
+                icon: const Icon(
+                  Icons.logout,
+                  color: Colors.white,
+                ),
                 tooltip: 'Logout',
               ),
             ],

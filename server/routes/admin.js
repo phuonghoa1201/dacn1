@@ -79,10 +79,16 @@ adminRouter.put("/admin/update-product/:id", admin, async (req, res) => {
 
 adminRouter.get("/admin/get-orders", admin, async (req, res) => {
   try {
-    const orders = await Order.find({});
+//    const orders = await Order.find({});
+//    res.json(orders);
+      const orders = await Order.find()
+      .populate('userId', 'name')
+      .exec();
+
     res.json(orders);
-  } catch (e) {
-    res.status(500).json({ error: e.message });
+  } catch (error) {
+        console.error('Error fetching orders:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

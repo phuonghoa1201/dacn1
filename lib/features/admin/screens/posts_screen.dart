@@ -55,48 +55,62 @@ class _PostsScreenState extends State<PostsScreen> {
             ),
             itemBuilder: (context, index) {
               final productData = products![index];
-              return Column(
-                children: [
-                  SizedBox(
-                    height: 140,
-                    child: SingleProduct(image: productData.images[0]),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          productData.name,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 2,
-                        ),
+              return Card(
+                margin: const EdgeInsets.all(8),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                elevation: 3,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+                        child: SingleProduct(image: productData.images[0]),
                       ),
-                      IconButton(
-                        onPressed: () => deleteProduct(productData, index),
-                        icon: const Icon(Icons.delete_outline),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      child: Text(
+                        productData.name,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: const TextStyle(fontWeight: FontWeight.w600),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AddProductScreen.routeName,
-                            arguments: {
-                              'product': productData,
-                              'isEditing': true,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            onPressed: () => deleteProduct(productData, index),
+                            icon: const Icon(Icons.delete_outline, color: Colors.red),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                AddProductScreen.routeName,
+                                arguments: {
+                                  'product': productData,
+                                  'isEditing': true,
+                                },
+                              );
                             },
-                          );
-                        },
-                        icon: const Icon(Icons.edit),
+                            icon: const Icon(Icons.edit, color: Colors.blue),
+                          ),
+                        ],
                       ),
-
-                    ],
-                  ),
-                ],
+                    ),
+                  ],
+                ),
               );
             },
           ),
           floatingActionButton: FloatingActionButton(
-            child: const Icon(Icons.add),
+            backgroundColor: const Color(0xFF8447FF),
+            child: const Icon(Icons.add, color: Colors.white),
             onPressed: navigateToAddProduct,
             tooltip: 'Add a Product',
           ),

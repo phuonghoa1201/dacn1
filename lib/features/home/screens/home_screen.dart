@@ -4,22 +4,26 @@ import 'package:dacn1/features/home/widgets/deal_of_day.dart';
 import 'package:dacn1/features/home/widgets/top_categories.dart';
 import 'package:flutter/material.dart';
 import 'package:dacn1/contants/global_variables.dart';
-import 'package:dacn1/features/auth/services/auth_service.dart';
 
 import '../../../search/screens/search_screen.dart';
+import '../widgets/ featured_products.dart';
+
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';
   const HomeScreen({Key? key}) : super(key: key);
 
+
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
+
 
 class _HomeScreenState extends State<HomeScreen> {
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             width: 1,
                           ),
                         ),
-                        hintText: 'Search what you want to find',
+                        hintText: 'Bạn muốn tìm gì?',
                         hintStyle: const TextStyle(
                           fontWeight: FontWeight.w200,
                           fontSize: 17,
@@ -99,6 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(height: 10),
             CarouselImage(),
             DealOfDay(),
+            FeaturedProducts(),
           ],
         ),
       ),

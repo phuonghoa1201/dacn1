@@ -1,9 +1,11 @@
+
 import 'package:dacn1/features/account/widgets/single_product.dart';
 import 'package:dacn1/features/admin/services/admin_services.dart';
 import 'package:dacn1/features/order_details/screens/order_details.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/loader.dart';
+import '../../../contants/utils.dart';
 import '../../../models/order.dart';
 
 class OrderScreen extends StatefulWidget {
@@ -36,6 +38,9 @@ class _OrderScreenState extends State<OrderScreen> {
           itemCount: orders!.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 2 / 3,
           ),
           itemBuilder: (context, index) {
             final orderData = orders![index];
@@ -47,10 +52,11 @@ class _OrderScreenState extends State<OrderScreen> {
                   arguments: orderData,
                 );
               },
-              // child: SizedBox(
-              //   height: 140,
-              //   child: SingleProduct(image: orderData.products[0].images[0]),
-              // ),
+              child: Card(
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,15 +68,33 @@ class _OrderScreenState extends State<OrderScreen> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(4.0),
-                    child: Text(
-                      'Đặt lúc: ${formatDate(DateTime.fromMillisecondsSinceEpoch(orderData.orderedAt))}',
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                  ),
+                  padding: const EdgeInsets.all(8.0),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+            Text(
+              capitalize(orderData.user.name),
+            style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+            ),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 4),
+            Text(
+            '${formatDate(DateTime.fromMillisecondsSinceEpoch(orderData.orderedAt))}',
+            style: const TextStyle(
+            fontSize: 14,
+            color: Colors.grey,
+            ),
+            ),
+            ],
+            ),
+            ),
                 ],
               ),
-
+              ),
             );
           },
         );
@@ -82,3 +106,7 @@ class _OrderScreenState extends State<OrderScreen> {
 
 
 }
+
+
+
+

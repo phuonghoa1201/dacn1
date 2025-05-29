@@ -166,7 +166,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
           ),
           title: Text(
             _isEditing ? 'Edit Product' : 'Add Product',
-            style: const TextStyle(color: Colors.black),
+            style: const TextStyle(color: Colors.black45, fontSize: 18),
           ),
         ),
       ),
@@ -298,6 +298,7 @@ class _AddProductScreenState extends State<AddProductScreen> {
                 CustomButton(
                   text: _isEditing ? 'Update' : 'Sell',
                   onTap: _isEditing ? updateProduct : sellProduct,
+                  color: Color(0xFF8447ff),
                 ),
               ],
             ),

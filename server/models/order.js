@@ -20,8 +20,11 @@ const orderSchema = mongoose.Schema({
     required: true,
   },
   userId: {
+//    required: true,
+//    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
     required: true,
-    type: String,
   },
   orderedAt: {
     type: Number,

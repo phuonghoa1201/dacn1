@@ -37,7 +37,10 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     for (int i = 0; i < widget.product.rating!.length; i++) {
       totalRating += widget.product.rating![i].rating;
       if (widget.product.rating![i].userId ==
-          Provider.of<UserProvider>(context, listen: false).user.id) {
+          Provider
+              .of<UserProvider>(context, listen: false)
+              .user
+              .id) {
         myRating = widget.product.rating![i].rating;
       }
     }
@@ -53,6 +56,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   void addToCart() {
     pds.addToCart(context: context, product: widget.product);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Đã thêm vào giỏ hàng'),
+        duration: Duration(seconds: 2),
+      ),
+    );
   }
 
   @override
@@ -82,10 +92,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           child: Padding(
                             padding: EdgeInsets.only(left: 6),
                             child: Icon(
-                              Icons.search,
-                              size: 23,
-                              color: Colors.black,
-                            ),
+                                Icons.search, size: 23, color: Colors.black),
                           ),
                         ),
                         filled: true,
@@ -95,18 +102,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                           borderRadius: BorderRadius.all(Radius.circular(7)),
                           borderSide: BorderSide.none,
                         ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(7)),
-                          borderSide: BorderSide(
-                            color: Colors.black38,
-                            width: 1,
-                          ),
-                        ),
-                        hintText: 'Search Electronic Store',
-                        hintStyle: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 17,
-                        ),
+                        hintText: 'Tìm kiếm sản phẩm...',
+                        hintStyle: TextStyle(fontWeight: FontWeight.w500,
+                            fontSize: 17),
                       ),
                     ),
                   ),
@@ -126,83 +124,87 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // ID + Rating
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text(widget.product.id!), Stars(rating: avgRating)],
+                children: [
+                  Text('Mã SP: ${widget.product.id!}'),
+                  Stars(rating: avgRating),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(
-                vertical: 20,
-                horizontal: 10,
-              ),
-              child: Text(widget.product.name, style: TextStyle(fontSize: 15)),
-            ),
+
+            // Slider ảnh
             CarouselSlider(
-              items:
-                  widget.product.images.map((i) {
-                    return Builder(
-                      builder:
-                          (BuildContext context) => Image.network(
-                            i,
-                            fit: BoxFit.contain,
-                            height: 200,
-                          ),
-                    );
-                  }).toList(),
+              items: widget.product.images.map((i) {
+                return Builder(
+                  builder: (BuildContext context) =>
+                      Image.network(
+                        i,
+                        fit: BoxFit.contain,
+                        height: 200,
+                      ),
+                );
+              }).toList(),
               options: CarouselOptions(viewportFraction: 1, height: 300),
             ),
-            Container(color: Colors.black12, height: 5),
-            Padding(
-              padding: EdgeInsets.all(8),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Deal Price: ',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+            SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextSpan(
-                      text:
-                          '${NumberFormat('#,###').format(widget.product.price)} vnđ',
-                      style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.red,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Text(widget.product.name, style: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold)),
+                    SizedBox(height: 8),
+
+                    Text(
+                      'Giá khuyến mãi: ${NumberFormat('#,###').format(
+                          widget.product.price)} VNĐ',
+                      style: TextStyle(fontSize: 18,
+                          color: Colors.red,
+                          fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      'Mô tả: ${widget.product.description}',
+                      style: TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
               ),
-            ),
+            // ),
+            SizedBox(height: 15),
+            // Nút Buy Now + Add to cart nằm ngang
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(widget.product.description),
-            ),
-            Container(color: Colors.black12, height: 5),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomButton(text: 'Buy Now', onTap: () {}),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: CustomButton(
-                text: 'Add to Cart',
-                onTap: addToCart,
-                color: Color.fromRGBO(254, 216, 19, 1),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CustomButton(
+                      text: 'Mua ngay',
+                      onTap: () {},
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: CustomButton(
+                      text: 'Thêm vào giỏ',
+                      onTap: addToCart,
+                      color: Color.fromRGBO(254, 216, 19, 1),
+                    ),
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 10),
-            Container(color: Colors.black12, height: 5),
+
+            // Đánh giá
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Text(
-                'Rate The Product',
+                'Đánh giá sản phẩm',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
               ),
             ),
@@ -213,21 +215,21 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               allowHalfRating: true,
               itemCount: 5,
               itemPadding: const EdgeInsets.symmetric(horizontal: 4.0),
-              itemBuilder:
-                  (context, _) =>
-                      Icon(Icons.star, color: GlobalVariables.secondaryColor),
+              itemBuilder: (context, _) =>
+                  Icon(Icons.star, color: GlobalVariables.secondaryColor),
               onRatingUpdate: (rating) {
                 pds.rateProduct(
                   context: context,
                   product: widget.product,
                   rating: rating,
                 );
-                print(rating);
               },
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),
     );
   }
+
 }

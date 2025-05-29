@@ -37,70 +37,80 @@ class _DealOfDayState extends State<DealOfDay> {
 
   @override
   Widget build(BuildContext context) {
-    return product == null
-        ? const Loader()
-        : product!.name.isEmpty
-        ? const SizedBox()
-        : GestureDetector(
+    if (product == null) return const Loader();
+    if (product!.name.isEmpty) return const SizedBox();
+
+    return GestureDetector(
       onTap: navigateToDetailScreen,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 10, top: 15),
-            child: const Text(
-              'Deal of the Day',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-          Image.network(
-            product!.images[0],
-            height: 235,
-            fit: BoxFit.fitHeight,
-          ),
-          Container(
-            padding: const EdgeInsets.only(left: 15),
-            alignment: Alignment.topLeft,
-            child: Text(
-              '${NumberFormat('#,###').format(product!.price)} VNĐ', // Hiển thị giá sản phẩm
-              style: const TextStyle(fontSize: 18),
-            ),
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            padding: const EdgeInsets.only(left: 15, top: 5, right: 40),
-            child: Text(
-              product!.name,  // Hiển thị tên sản phẩm
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: product!.images
-                  .map(
-                    (e) => Image.network(
-                  e,
-                  fit: BoxFit.fitWidth,
-                  width: 100,
-                  height: 100,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+        child: Card(
+          elevation: 4,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Deal sốc',
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                 ),
-              )
-                  .toList(),
+                const SizedBox(height: 10),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    product!.images[0],
+                    height: 250,
+                    width: double.infinity,
+                    fit: BoxFit.fitHeight,
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  '${NumberFormat('#,###').format(product!.price)} VNĐ',
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.redAccent, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  product!.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                const SizedBox(height: 12),
+                SizedBox(
+                  height: 100,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: product!.images.length,
+                    separatorBuilder: (_, __) => const SizedBox(width: 10),
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          product!.images[index],
+                          width: 100,
+                          height: 100,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  'See all deals',
+                  style: TextStyle(
+                    color: Colors.cyan[800],
+                    fontWeight: FontWeight.w500,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(vertical: 15).copyWith(left: 15),
-            alignment: Alignment.topLeft,
-            child: Text(
-              'See all deals',
-              style: TextStyle(color: Colors.cyan[800]),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

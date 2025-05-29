@@ -76,4 +76,14 @@ productRouter.get("/api/deal-of-day", auth, async (req, res) => {
  }
 });
 
+// GET: /api/featured-products - lấy 6 sản phẩm nổi bật
+productRouter.get("/api/featured-products", auth, async (req, res) => {
+ try {
+   const featuredProducts = await Product.find().limit(6);
+   res.json(featuredProducts);
+ } catch (e) {
+   res.status(500).json({ error: e.message });
+ }
+});
+
 module.exports = productRouter;
