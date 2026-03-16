@@ -13,8 +13,7 @@ const chatRouter = require("./routes/chat");
 //init
 const PORT = 3000;
 const app = express();
-const DB =
- "mongodb+srv://anhngocthiduong:dacn123@cluster0.atjpxe0.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
 
 
 //middleware
